@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Heros</title>
+    <!-- font awesome link -->
+    <script src="https://kit.fontawesome.com/4aac9664a9.js" crossorigin="anonymous"></script>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Oswald&display=swap');
+
+        body {
+            width: 100vw;
+            font-family: 'Inter', sans-serif;
+            background: rgb(40, 8, 54);
+
+        }
+
+        * {
+            margin: 0px;
+            padding: opx;
+        }
+
+        .logo {
+            padding-top: 20px;
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        .logo h1 {
+            max-width: 5.3rem;
+            color: rgb(206, 206, 206);
+        }
+
+        .logo span {
+            margin-left: -5px;
+            color: rgb(209, 29, 89);
+        }
+
+
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+
+        .poster {
+            margin-top: 1rem;
+
+            height: 10rem;
+            width: 10rem;
+        }
+
+        .poster img {
+            border: 5px solid lightyellow;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            transition: all ease-in-out 0.5s;
+            height: 100%;
+            width: 100%;
+        }
+
+        .poster img:hover {
+            transform: rotateX(-45deg) rotateY(45deg) rotateZ(30deg);
+            box-shadow: 0px 0px 5px 5px #d8d5b7;
+
+        }
+
+        .poster i {
+            font-size: 1.5rem;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <h1>My&nbsp;<span>Heros</span></h1>
+    </div>
+
+    <div class="container">
+        <!-- <div class="poster">
+            <img src = "batman.jpg">
+            
+        </div> -->
+    </div>
+
+    <script>
+
+
+        let favContainer = document.querySelector(".container");
+        let list = [];
+        list = JSON.parse(localStorage.getItem("favIds"));
+
+        function fetching(list) {
+
+            for (var i = 0; i < list.length; i++) {
+                loadhero(list[i]);
+            }
+        }
+
+
+       
+        async function loadhero(heroid) {
+
+            const URL = "https://www.superheroapi.com/api.php/1846003859067464/" + heroid.trim();
+            console.log(URL);
+            const res = await fetch(`${URL}`);
+            const data = await res.json();
+            console.log(data);
+            if (data) {
+                showSearchList(data);
+            }
+        }
+
+        const showSearchList = (data) => {
+
+
+            const divElem = document.createElement('div');
+            divElem.classList.add('poster');
+
+            divElem.innerHTML = `
+                        <img src = "${data.image.url}" alt = "">
+            
+                         `;
+            favContainer.appendChild(divElem);
+
+        }
+
+        fetching(list);
+
+
+
+    </script>
+</body>
+
+</html>
