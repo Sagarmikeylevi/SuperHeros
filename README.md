@@ -14,6 +14,8 @@ SuperHeros is a web application that allows users to search and view information
 - CSS
 - JavaScript
 
+![Screenshot (153)](https://user-images.githubusercontent.com/114811573/220136248-ab25780f-e183-4c65-89e9-08cdac93838d.png)
+
 ## Deployement
 Project already deployed on Render.Visit:https://sagarmikeylevi.github.io/SuperHeros/
 
